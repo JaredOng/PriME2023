@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Level 1</title>
     <link rel="stylesheet" href="OR.css">
   </head>
   <script type="text/javascript">
@@ -12,7 +12,7 @@
       {"Cost": 1,"People": 0, "Planet": -5, "Profit": 10},
       {"Cost": 1.5,"People": 0, "Planet": -20, "Profit": 20},
       {"Cost": 1.5,"People": 20, "Planet": -5, "Profit": 0},
-      {"Cost": 3,"People": 20, "Planet": 10, "Profit": -20},
+      {"Cost": 3,"People": 20, "Planet": -10, "Profit": 20},
       {"Cost": 5,"People": 0, "Planet": -10, "Profit": 0},
       {"Cost": 0.5,"People": 0, "Planet": 0, "Profit": 0},
     ];
@@ -26,6 +26,10 @@
     var airport_pos_col = 10;
     var seaport_pos_row = 10;
     var seaport_pos_col = 16;
+    var people = 0;
+    var planet = 500;
+    var profit = 0;
+    var boxes2;
 
     window.onload= function(){
       var temp;
@@ -104,15 +108,16 @@
         }
       }
       // for power visualization
-      var boxes2 = document.querySelectorAll('.power_range');
+      // for power visualization
+      boxes2 = document.querySelectorAll('.main_cell');
       if (current_building == 5) {
         boxes2.forEach(box => {
-          box.style.backgroundImage = 'repeating-linear-gradient(36deg, rgba(255,255,255, 1), rgba(255,255,255, 1) 1px, transparent 2px, transparent 2px)';
+          box.style.setProperty('--linear_BG', 'repeating-linear-gradient(36deg, rgba(255,255,255, 1), rgba(255,255,255, 1) 1px, transparent 2px, transparent 2px)');
         });
       }
       else {
         boxes2.forEach(box => {
-          box.style.backgroundImage = 'none';
+          box.style.setProperty('--linear_BG', 'none');
         });
       }
 
@@ -340,9 +345,9 @@
 
     function Count_output(){
       // budget and constraints
-      let people = 0;
-      let planet = 500;
-      let profit = 0;
+      people = 0;
+      planet = 500;
+      profit = 0;
 
       let condition_2 = "Check";
       let condition_3 = "Check";
@@ -384,6 +389,12 @@
       else {
         document.getElementsByClassName('condition_img')[2 - 1].src = "Images/Cross.png"
       }
+      if (budget >= 0) {
+        document.getElementsByClassName('budget_img')[0].src = "Images/Check.png"
+      }
+      else {
+        document.getElementsByClassName('budget_img')[0].src = "Images/Cross.png"
+      }
 
       document.getElementsByClassName('condition_img')[2 - 1].src = "Images/" + condition_2 + ".png"
       document.getElementsByClassName('condition_img')[3 - 1].src = "Images/" + condition_3 + ".png"
@@ -400,7 +411,7 @@
         document.getElementsByClassName('yessubmit')[0].style.display = "block"
       }
       else {
-        document.getElementsByClassName('submit_top')[0].innerHTML = "Please follow all provided conditions"
+        document.getElementsByClassName('submit_top')[0].innerHTML = "Please follow budget and provided conditions"
         document.getElementsByClassName('yessubmit')[0].style.display = "none"
 
       }
@@ -587,6 +598,13 @@
       if (event.target == modal) {
         Submit_disappear();
       }
+    }
+
+    function final_submit(){
+      localStorage.setItem("Score1", people + planet + profit);
+      setTimeout(() => {
+        window.location = "./OR2.html";
+      }, "1000");
     }
 
   </script>
@@ -922,6 +940,7 @@
         <div class="right_budget">
           <p>Budget Remaining:</p>
           <span class="budget">40M</span>
+          <img class="budget_img" src="Images/Check.png" alt="">
         </div>
         <div class="conditions">
           <h1>CONDITIONS:</h1>
@@ -988,11 +1007,11 @@
       <div class="submitmodal">
         <div class="confirmsubmit">
           <div class="submit_top">
-            Confirm submission?
+            Submit to proceed to the next level
           </div>
 
           <div class="buttons">
-            <div class="butto yessubmit">
+            <div class="butto yessubmit" onclick="final_submit()">
               Submit
             </div>
             <div class="butto nosubmit" onclick="Submit_disappear()">

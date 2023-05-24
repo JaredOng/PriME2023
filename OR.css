@@ -188,7 +188,7 @@ body{
 .power_range{
   /* background-color: blue !important; */
   /* outline: 3px solid blue; */
-  background-image: repeating-linear-gradient(36deg, rgba(255,255,255, 1), rgba(255,255,255, 1) 1px, transparent 2px, transparent 2px);
+  background-image: var(--linear_BG, repeating-linear-gradient(36deg, rgba(255,255,255, 1), rgba(255,255,255, 1) 1px, transparent 2px, transparent 2px));
 }
 
 .power_range_hover{
@@ -196,14 +196,6 @@ body{
   background-size: 200%;
   /* animation-name: entrance;
   animation-duration: 4s; */
-}
-
-.sandz_cell.power_range{
-  background-image: repeating-linear-gradient(36deg, rgba(255,255,255, 1), rgba(255,255,255, 1) 1px, transparent 2px, transparent 2px);
-}
-
-.sandz_cell.power_range_hover{
-  background-image: repeating-linear-gradient(36deg, rgba(255,255,255, 1), rgba(255,255,255, 1) 1px, transparent 2px, transparent 2px);
 }
 
 .bottom_subpanel{
@@ -304,9 +296,10 @@ body{
   width: 100%;
   display: flex;
   box-sizing: border-box;
-  padding: 20px 30px 10px;
+  padding: 20px 30px 15px;
   color: white;
   background-color: #B8555A;
+  align-items: center;
 }
 
 .right_budget *{
@@ -319,6 +312,10 @@ body{
 .budget{
   text-align: right;
   width: 20%;
+}
+
+.right_budget img{
+  width: 10%;
 }
 
 .conditions{
@@ -544,11 +541,26 @@ body{
   color: white;
 }
 
+.helpbox2{
+  background-color: #5EAAAF !important;
+}
+
 .helpbox h1{
   font-family: CodeProLCBlack;
   text-align: center;
   margin: 20px;
   font-size: 50px;
+}
+
+.helpbox h2{
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.helpbox h3{
+  text-align: center;
+  margin: 250px 0px 30px;
 }
 
 .helpcancel{
